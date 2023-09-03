@@ -1,5 +1,5 @@
 {
-    "name": "inputController",
+    "name": "inputSys",
     "maps": [
         {
             "name": "player",
@@ -15,20 +15,20 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "3f89a994-f186-4c64-92a5-381be3f37b09",
-                    "expectedControlType": "Button",
+                    "name": "cardAim",
+                    "type": "Value",
+                    "id": "a96c19e0-3515-408d-b423-bb6bc2986655",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "25fd4292-1ab2-4f2a-bdfa-32989baa79f0",
-                    "path": "<Touchscreen>/position",
+                    "path": "<Touchscreen>/primaryTouch/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "android",
@@ -49,12 +49,12 @@
                 },
                 {
                     "name": "",
-                    "id": "83de1b27-0bf4-4cae-8ce2-a3b0f24792d4",
-                    "path": "",
-                    "interactions": "",
+                    "id": "64100637-aa9c-4ea5-9979-730af6bfcca0",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "android",
-                    "action": "New action",
+                    "action": "cardAim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
