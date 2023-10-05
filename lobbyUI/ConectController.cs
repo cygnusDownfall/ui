@@ -50,6 +50,7 @@ public class ConectController : MonoBehaviour
             RelayServerData sd = new RelayServerData(allocation, "dtls");
             GetComponent<UnityTransport>().SetRelayServerData(sd);
             NetworkManager.Singleton.StartHost();
+            playerLoaded();
             return joincode;
         }
         catch (RelayServiceException e)
@@ -68,10 +69,16 @@ public class ConectController : MonoBehaviour
             RelayServerData sd = new RelayServerData(allocation, "dtls");
             GetComponent<UnityTransport>().SetRelayServerData(sd);
             NetworkManager.Singleton.StartClient();
+            playerLoaded();
+
         }
         catch (RelayServiceException e)
         {
             Debug.LogError("relay error:" + e);
         }
     }
+    public void playerLoaded(){
+        playerController.Instance.loadPlayer();
+    }
+    
 }
