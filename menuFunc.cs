@@ -1,8 +1,8 @@
-using TMPro;
 using UnityEngine;
 
 public class menuFunc : Singleton< MonoBehaviour>
 {
+    [SerializeField] TMPro.TMP_Text worldID;
     string joincode;
     [SerializeField] GameObject menuCam;
     public async void EnterRoom()
@@ -22,15 +22,15 @@ public class menuFunc : Singleton< MonoBehaviour>
                 GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().joinRelay(joincode);
 
             }
-            // room.SetActive(true);
-            // room.transform.GetChild(2).GetComponent<TMP_Text>().text=joincode;
             toogleGameMenu(false);
+            worldID.text = joincode;
+
+            loadingUI.Instance.Show();
         }
         catch (UnityException e)
         {
             Debug.LogError(e);
         }
-
     }
 
     public void toogleGameMenu(bool isMenu)
@@ -38,7 +38,6 @@ public class menuFunc : Singleton< MonoBehaviour>
         menuCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority=isMenu?100:0;
 
     }
-
 
     public void Exit()
     {
