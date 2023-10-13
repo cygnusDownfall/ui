@@ -31,12 +31,14 @@ public class loadingUI : Singleton<loadingUI>
 
     public void Show()
     {
+        Debug.Log("loading ...."+Time.time);
         gameObject.SetActive(true);
         StartCoroutine(run());
     }
 
     public void Hide()
     {
+        Debug.Log("unloading...."+Time.time);
         gameObject.SetActive(false);
         StopCoroutine(run());
     }
