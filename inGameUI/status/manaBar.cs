@@ -22,7 +22,7 @@ public class manaBar : Singleton<manaBar>
     }
     void getDataFromPlayer()
     {
-        var info = playerController.Instance.playerInfo;
+        var info = PlayerController.Instance.playerInfo;
         maxMana = info.maxMP;
         currentMana = info.mp;
     }

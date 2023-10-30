@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine.UI;
 
 public class hpBar : Singleton<hpBar>
@@ -19,9 +18,9 @@ public class hpBar : Singleton<hpBar>
 
     public void load()
     {
-        var info = playerController.Instance.playerInfo;
+        var info = PlayerController.Instance.playerInfo;
 
-        Value = info.hp / info.maxHP;
+        Value = info.hp.Value / info.maxHP;
 
     }
 }

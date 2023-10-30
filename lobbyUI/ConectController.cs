@@ -78,7 +78,7 @@ public class ConectController : MonoBehaviour
         }
     }
     public void playerLoaded(){
-        playerController.Instance.loadPlayer();
+        PlayerController.Instance.loadPlayer();
     }
     
 }
