@@ -19,7 +19,7 @@ public class hpBar : Singleton<hpBar>
 
     public void load()
     {
-        var info = playerController.Instance.playerInfo;
+        var info =PlayerController.Instance.playerInfo;
 
         Value = info.hp / info.maxHP;
 
