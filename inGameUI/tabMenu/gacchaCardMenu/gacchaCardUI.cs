@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +7,7 @@ public class gacchaCardUI : MonoBehaviour
 {
     gacchaSystem<cardModel> gacchaSys;
     public List<cardPack> packList; //sau nay co the phat trien lay tu api 
-    public byte indexOfCurrentPack;
+    public byte indexOfCurrentPack = 255;
     bool toogleState = false;
     [Header("-------------------Ref UI Result-------------------")]
     [SerializeField] private GameObject cardUIResultTemplate;
@@ -22,10 +21,10 @@ public class gacchaCardUI : MonoBehaviour
     [SerializeField] private GameObject buttonGacchaX1, buttonGacchaXAll;
 
     [Header("-----------------Ref Info Pack-------------------")]
-    [SerializeField] private TMP_Text namePackUI, timeRemainUI, noteUI;
+    [SerializeField] private TMPro.TMP_Text namePackUI, timeRemainUI, noteUI;
     [SerializeField] private Image illustrationPackUI;
     [Header("---------------Infor---------------")]
-    public int cardPoint;
+
     public byte prizeForGaccha;
 
 
@@ -34,8 +33,8 @@ public class gacchaCardUI : MonoBehaviour
         toogleState = !toogleState;
         if (toogleState)
         {
-            loadWindowGacchaCard();
             gacchaPanel.SetActive(true);
+            loadWindowGacchaCard();
         }
         else
         {
@@ -47,23 +46,24 @@ public class gacchaCardUI : MonoBehaviour
     {
         loadPackList();
         SelectPack(0);
+        loadMaxGacchaNumber();
+
     }
     void loadPackList()
     {
         var leftTrans = leftsidePackPanel.transform;
-        if (leftTrans.childCount > 0 && leftTrans.childCount != packList.Count)
-        {
-            for (int i = 0; i < leftTrans.childCount; i++)
-            {
-                Destroy(leftTrans.GetChild(i).gameObject);
-            }
-        }
+        GameObject packUI;
         for (int i = 0; i < packList.Count; i++)
         {
-            var packUI = Instantiate(packUITemplate, leftsidePackPanel.transform);
-            packUI.GetComponentInChildren<TMP_Text>().text = packList[i].namePack;
+            Debug.Log(i);
+            packUI = (i < leftTrans.childCount) ? leftTrans.GetChild(i).gameObject : Instantiate(packUITemplate, leftsidePackPanel.transform);
+            packUI.GetComponentInChildren<TMPro.TMP_Text>().text = packList[i].namePack;
             //packUI.GetComponent<Image>().sprite = packList[i].borderImage;
-            packUI.GetComponent<Button>().onClick.AddListener(() => SelectPack((byte)i));
+            int indexEventCall = i;
+            packUI.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                SelectPack(indexEventCall);
+            });
         }
     }
     /// <summary>
@@ -71,52 +71,64 @@ public class gacchaCardUI : MonoBehaviour
     /// </summary>
     void loadMaxGacchaNumber()
     {
-        cardPoint = PlayerController.Instance.playerInfo.cardPoint;
-        int res = cardPoint / prizeForGaccha;
-
-        buttonGacchaXAll.GetComponent<Button>().onClick.AddListener(() => clickToGaccha((byte)res));
+        deckCard.Instance.cardPoint = PlayerController.Instance.playerInfo.cardPoint;
+        int res = deckCard.Instance.cardPoint / prizeForGaccha;
+        byte tmp = (byte)res;
+        Debug.Log(tmp);
+        buttonGacchaXAll.GetComponent<Button>().onClick.AddListener(() => clickToGaccha(tmp));
     }
     void loadInfoPack()
     {
+        Debug.Log("load info pack");
         namePackUI.text = packList[indexOfCurrentPack].namePack;
         timeRemainUI.text = packList[indexOfCurrentPack].timeRemain;
         noteUI.text = packList[indexOfCurrentPack].notes;
         illustrationPackUI.sprite = packList[indexOfCurrentPack].illustration;
     }
     #endregion
-    public void SelectPack(byte index)
+    public void SelectPack(int index)
     {
         if (indexOfCurrentPack == index) return;
+        Debug.Log("select pack:" + index);
+
+        indexOfCurrentPack = (byte)index;
+        Debug.Log("byte index:" + indexOfCurrentPack);
         loadInfoPack();
-        loadMaxGacchaNumber();
-        indexOfCurrentPack = index;
     }
-    public void clickToGaccha(byte num)
+    public void clickToGaccha(int num)
     {
+        if (num == 0) return;
+        Debug.Log(num * prizeForGaccha);
+        if (deckCard.Instance.cardPoint < num * prizeForGaccha) return;
         List<cardModel> res = new List<cardModel>();
         gacchaSys ??= new gacchaSystem<cardModel>();
+        Debug.Log("click gaccha pack index:" + indexOfCurrentPack);
+        packList[indexOfCurrentPack].copyTo(gacchaSys);
         Debug.Log("danh sach bai da nhan:");
         for (int i = 0; i < num; i++)
         {
             //gaccha ra cardModel
-            packList[indexOfCurrentPack].copyTo(gacchaSys);
             var resGaccha = gacchaSys.gaccha();
             res.Add(resGaccha);
             Debug.Log(resGaccha);
         }
-
+        deckCard.Instance.addCard(res);
         //xu ly UI phan thuong nhan duoc 
         StartCoroutine(showResultGaccha(res));
+        loadMaxGacchaNumber();
+
     }
     IEnumerator showResultGaccha(List<cardModel> res)
     {
         gacchaResultPanel.SetActive(true);
+        Debug.Log("number of Result gaccha:" + res.Count);
         for (int i = 0; i < res.Count; i++)
         {
             var cardUI = gacchaResultContentZone.GetChild(i).gameObject ?? Instantiate(cardUIResultTemplate, gacchaResultContentZone);
+            Debug.Log(cardUI);
             if (gacchaResultContentZone.GetChild(i).gameObject != null) cardUI.SetActive(true);
             cardUI.GetComponent<Image>().sprite = res[i].icon;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
     public void clickToAcceptResult()
@@ -128,9 +140,12 @@ public class gacchaCardUI : MonoBehaviour
         gacchaResultPanel.SetActive(false);
     }
     #region mono
-    private void Start()
+    private void OnEnable()
     {
         //loadWindowGacchaCard();
+    }
+    private void Start()
+    {
 
     }
     #endregion
