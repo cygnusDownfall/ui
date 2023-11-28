@@ -24,7 +24,7 @@ public class gacchaCardUI : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text namePackUI, timeRemainUI, noteUI;
     [SerializeField] private Image illustrationPackUI;
     [Header("---------------Infor---------------")]
-    int cardPoint;
+
     public byte prizeForGaccha;
 
 
@@ -71,8 +71,8 @@ public class gacchaCardUI : MonoBehaviour
     /// </summary>
     void loadMaxGacchaNumber()
     {
-        cardPoint = PlayerController.Instance.playerInfo.cardPoint;
-        int res = cardPoint / prizeForGaccha;
+        deckCard.Instance.cardPoint = PlayerController.Instance.playerInfo.cardPoint;
+        int res = deckCard.Instance.cardPoint / prizeForGaccha;
         byte tmp = (byte)res;
         Debug.Log(tmp);
         buttonGacchaXAll.GetComponent<Button>().onClick.AddListener(() => clickToGaccha(tmp));
@@ -99,7 +99,7 @@ public class gacchaCardUI : MonoBehaviour
     {
         if (num == 0) return;
         Debug.Log(num * prizeForGaccha);
-        if (cardPoint < num * prizeForGaccha) return;
+        if (deckCard.Instance.cardPoint < num * prizeForGaccha) return;
         List<cardModel> res = new List<cardModel>();
         gacchaSys ??= new gacchaSystem<cardModel>();
         Debug.Log("click gaccha pack index:" + indexOfCurrentPack);
@@ -142,11 +142,10 @@ public class gacchaCardUI : MonoBehaviour
     #region mono
     private void OnEnable()
     {
-        loadWindowGacchaCard();
+        //loadWindowGacchaCard();
     }
     private void Start()
     {
-        //loadWindowGacchaCard();
 
     }
     #endregion

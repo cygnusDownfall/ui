@@ -8,13 +8,15 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 
-public class ConectController : MonoBehaviour
+public class ConectController : Singleton<ConectController>
 {
     [SerializeField] int maxPlayer = 4;
-    async void Awake()
+    override public async void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(this.gameObject);
         await UnityServices.InitializeAsync();
+        await ChatSystem.Instance.startSystem();
 
     }
     async void Start()
@@ -32,8 +34,9 @@ public class ConectController : MonoBehaviour
                                 Debug.Log("Signed in anonymously");
                             }
                         });
-
-        }catch(AuthenticationException e){
+        }
+        catch (AuthenticationException e)
+        {
             Debug.Log("Authen error: " + e);
         }
 
@@ -70,15 +73,17 @@ public class ConectController : MonoBehaviour
             GetComponent<UnityTransport>().SetRelayServerData(sd);
             NetworkManager.Singleton.StartClient();
             playerLoaded();
-
         }
         catch (RelayServiceException e)
         {
             Debug.LogError("relay error:" + e);
         }
     }
-    public void playerLoaded(){
+    public void playerLoaded()
+    {
         PlayerController.Instance.loadPlayer();
     }
-    
+
 }
+
+

@@ -1,21 +1,21 @@
 using UnityEngine;
 
-public class menuFunc : Singleton< MonoBehaviour>
+public class menuFunc : Singleton<menuFunc>
 {
-    [SerializeField] TMPro.TMP_Text worldID;
-    string joincode;
+    public TMPro.TMP_Text worldID;
+    public string joincode;
     [SerializeField] GameObject menuCam;
     public async void EnterRoom()
     {
         joincode = GameObject.Find("JoinCodeInput").GetComponent<TMPro.TMP_InputField>().text;
-        Debug.LogWarning("join code:"+joincode);
+        Debug.LogWarning("join code:" + joincode);
         try
         {
             if ((joincode == null) || (joincode == ""))
             {
                 Debug.Log("Please Enter a Join Code");
                 joincode = await GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().createRelay();
-                Debug.LogWarning("create room:"+joincode);
+                Debug.LogWarning("create room:" + joincode);
             }
             else
             {
@@ -26,7 +26,7 @@ public class menuFunc : Singleton< MonoBehaviour>
             worldID.text = joincode;
 
             //loadingUI.Instance.Show();
-            PlayerController.Instance.loadPlayer();  
+            PlayerController.Instance.loadPlayer();
         }
         catch (UnityException e)
         {
@@ -36,8 +36,18 @@ public class menuFunc : Singleton< MonoBehaviour>
 
     public void toogleGameMenu(bool isMenu)
     {
-        menuCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority=isMenu?100:0;
+        menuCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = isMenu ? 100 : 0;
 
+    }
+    public void toogle(GameObject obj)
+    {
+        obj.SetActive(!obj.activeSelf);
+
+    }
+
+    public void rot(GameObject obj, Vector3 axis, float rot)
+    {
+        obj.transform.Rotate(axis, rot);
     }
 
     public void Exit()
