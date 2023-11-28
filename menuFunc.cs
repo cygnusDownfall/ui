@@ -25,7 +25,8 @@ public class menuFunc : Singleton< MonoBehaviour>
             toogleGameMenu(false);
             worldID.text = joincode;
 
-            loadingUI.Instance.Show();
+            //loadingUI.Instance.Show();
+            PlayerController.Instance.loadPlayer();  
         }
         catch (UnityException e)
         {
