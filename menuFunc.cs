@@ -19,14 +19,18 @@ public class menuFunc : Singleton<menuFunc>
             }
             else
             {
-                GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().joinRelay(joincode);
+               await GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().joinRelay(joincode);
 
             }
             toogleGameMenu(false);
             worldID.text = joincode;
 
             //loadingUI.Instance.Show();
+            
             PlayerController.Instance.loadPlayer();
+            await ChatSystem.Instance.startSystem();
+
+            menuCam.SetActive(false);
         }
         catch (UnityException e)
         {

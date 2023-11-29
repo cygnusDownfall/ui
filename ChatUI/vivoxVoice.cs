@@ -15,7 +15,7 @@ public class ChatSystem : Singleton<ChatSystem>
     public Transform textChatContentContainer;
     public TMP_InputField inputTypingText;
     #region lifeCycleVivox
-    async Task InitializeAsync()
+    public async Task InitializeAsync()
     {
         await VivoxService.Instance.InitializeAsync();
     }
@@ -148,9 +148,7 @@ public class ChatSystem : Singleton<ChatSystem>
     }
     public async Task startSystem()
     {
-        Debug.Log("start vivox init");
-        await InitializeAsync();
-        Debug.Log("init vivox");
+      
         await LoginToVivoxAsync();
         await JoinEchoChannelAsync();
         BindSessionEvents(true);
