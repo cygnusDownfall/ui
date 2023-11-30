@@ -16,7 +16,9 @@ public class ConectController : Singleton<ConectController>
         base.Awake();
         DontDestroyOnLoad(this.gameObject);
         await UnityServices.InitializeAsync();
-        await ChatSystem.Instance.startSystem();
+
+
+        _ = ChatSystem.Instance.startSystem();
 
     }
     async void Start()

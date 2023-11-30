@@ -152,7 +152,6 @@ public class ChatSystem : Singleton<ChatSystem>
         await InitializeAsync();
         Debug.Log("init vivox");
         await LoginToVivoxAsync();
-        await JoinEchoChannelAsync();
         BindSessionEvents(true);
 
     }
