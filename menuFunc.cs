@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class menuFunc : Singleton<menuFunc>
 {
@@ -19,14 +20,21 @@ public class menuFunc : Singleton<menuFunc>
             }
             else
             {
-                GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().joinRelay(joincode);
+                await GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().joinRelay(joincode);
 
             }
             toogleGameMenu(false);
             worldID.text = joincode;
 
             //loadingUI.Instance.Show();
+            await SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+
             PlayerController.Instance.loadPlayer();
+
+            //join channel with joincode 
+            await ChatSystem.Instance.JoinEchoChannelAsync();
+
+            menuCam.SetActive(false);
         }
         catch (UnityException e)
         {

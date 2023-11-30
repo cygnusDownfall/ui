@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
-using Unity.Services.Core;
 using Unity.Services.Vivox;
 using UnityEngine;
-public class ChatSystem : Singleton<ChatSystem>
+public class ChatSystem : SingletonPersistent<ChatSystem>
 {
     public string UserDisplayName = "";
     List<RosterItem> rosterList = new List<RosterItem>();
@@ -15,7 +14,7 @@ public class ChatSystem : Singleton<ChatSystem>
     public Transform textChatContentContainer;
     public TMP_InputField inputTypingText;
     #region lifeCycleVivox
-    async Task InitializeAsync()
+    public async Task InitializeAsync()
     {
         await VivoxService.Instance.InitializeAsync();
     }
@@ -148,9 +147,9 @@ public class ChatSystem : Singleton<ChatSystem>
     }
     public async Task startSystem()
     {
-        Debug.Log("start vivox init");
-        await InitializeAsync();
         Debug.Log("init vivox");
+        await InitializeAsync();
+        Debug.Log("init done vivox");
         await LoginToVivoxAsync();
         BindSessionEvents(true);
 

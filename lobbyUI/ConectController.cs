@@ -18,7 +18,6 @@ public class ConectController : Singleton<ConectController>
         await UnityServices.InitializeAsync();
 
 
-        _ = ChatSystem.Instance.startSystem();
 
     }
     async void Start()
@@ -41,7 +40,7 @@ public class ConectController : Singleton<ConectController>
         {
             Debug.Log("Authen error: " + e);
         }
-
+        _ = ChatSystem.Instance.startSystem();
         //
     }
 
@@ -55,7 +54,7 @@ public class ConectController : Singleton<ConectController>
             RelayServerData sd = new RelayServerData(allocation, "dtls");
             GetComponent<UnityTransport>().SetRelayServerData(sd);
             NetworkManager.Singleton.StartHost();
-            playerLoaded();
+            NetworkManager.Singleton.StartClient();
             return joincode;
         }
         catch (RelayServiceException e)
@@ -65,7 +64,7 @@ public class ConectController : Singleton<ConectController>
         }
 
     }
-    public async void joinRelay(string joincode)
+    public async Task joinRelay(string joincode)
     {
         try
         {
@@ -74,18 +73,12 @@ public class ConectController : Singleton<ConectController>
             RelayServerData sd = new RelayServerData(allocation, "dtls");
             GetComponent<UnityTransport>().SetRelayServerData(sd);
             NetworkManager.Singleton.StartClient();
-            playerLoaded();
         }
         catch (RelayServiceException e)
         {
             Debug.LogError("relay error:" + e);
         }
     }
-    public void playerLoaded()
-    {
-        PlayerController.Instance.loadPlayer();
-    }
-
 }
 
 
