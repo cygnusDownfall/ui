@@ -703,6 +703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3704488635080013889}
+  - component: {fileID: 565178379632251028}
   m_Layer: 5
   m_Name: sideMenuCanvasGruop
   m_TagString: Untagged
@@ -728,6 +729,24 @@ Transform:
   - {fileID: 1499997144166056860}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565178379632251028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038801042559592856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21b5a5f3690f891fb9506d015a53a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserDisplayName: 
+  rosterItemTemplate: {fileID: 0}
+  rosterItemContainer: {fileID: 0}
+  textChatContentTemplate: {fileID: 2692850065309044541}
+  textChatContentContainer: {fileID: 8639612161850863440}
+  inputTypingText: {fileID: 5698875773167937244}
 --- !u!1 &3118522290466414015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,11 +1791,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7467915402427568144, guid: 54e0df3772d8cc3d19008c96feeda799,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2633162464977057880}
-    - target: {fileID: 7467915402427568144, guid: 54e0df3772d8cc3d19008c96feeda799,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -1823,11 +1837,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6799288701992163414, guid: 54e0df3772d8cc3d19008c96feeda799,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2633162464977057880}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54e0df3772d8cc3d19008c96feeda799, type: 3}
 --- !u!1 &2692850065309044541 stripped
 GameObject:
@@ -1841,24 +1851,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1431333121786854708}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2633162464977057880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5586417270659933538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a21b5a5f3690f891fb9506d015a53a08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UserDisplayName: 
-  rosterItemTemplate: {fileID: 0}
-  rosterItemContainer: {fileID: 0}
-  textChatContentTemplate: {fileID: 2692850065309044541}
-  textChatContentContainer: {fileID: 8639612161850863440}
-  inputTypingText: {fileID: 5698875773167937244}
 --- !u!114 &5698875773167937244 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6686548806111730664, guid: 54e0df3772d8cc3d19008c96feeda799,

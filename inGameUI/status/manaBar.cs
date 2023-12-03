@@ -34,21 +34,17 @@ public class manaBar : Singleton<manaBar>
         {
             GameObject token = Instantiate(manaToken, transform);
             tokens[i] = token;
-            if (i > currentMana - 1) { token.GetComponent<Image>().material = tokenMatOff; continue;}
-            setMat((byte)i,token);
+            if (i > currentMana - 1) { token.GetComponent<Image>().material = tokenMatOff; continue; }
+            setMat((byte)i, token);
             //continue
         }
     }
-/// <summary>
-/// set mat for active mana token
-/// </summary>
-/// <param name="i"></param>
-/// <param name="token"></param> <summary>
-/// 
-/// </summary>
-/// <param name="i"></param>
-/// <param name="token"></param>
-    void setMat(byte i,GameObject token)
+    /// <summary>
+    /// set mat for active mana token
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="token"></param> 
+    void setMat(byte i, GameObject token)
     {
         if (i < lowThreshold) token.GetComponent<Image>().material = tokenMatLow;
         else if (i < mediumThreshold) token.GetComponent<Image>().material = tokenMatMedium;
@@ -63,10 +59,10 @@ public class manaBar : Singleton<manaBar>
         currentMana += amount;
         if (currentMana >= maxMana)
         { currentMana = maxMana; }
-        for (byte i =(byte)(currentMana - amount); i < currentMana; i++)
+        for (byte i = (byte)(currentMana - amount); i < currentMana; i++)
         {
             Debug.Log(i);
-            setMat(i,tokens[i]);
+            setMat(i, tokens[i]);
         }
     }
     /// <summary>
@@ -82,7 +78,7 @@ public class manaBar : Singleton<manaBar>
         {
             Debug.Log(i);
             Debug.Log(currentMana);
-            tokens[i].GetComponent<Image>().material=tokenMatOff;
+            tokens[i].GetComponent<Image>().material = tokenMatOff;
         }
     }
 }

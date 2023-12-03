@@ -152,7 +152,6 @@ public class ChatSystem : SingletonPersistent<ChatSystem>
         Debug.Log("init done vivox");
         await LoginToVivoxAsync();
         BindSessionEvents(true);
-
     }
     public async void endSystem()
     {

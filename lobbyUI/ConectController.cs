@@ -11,37 +11,34 @@ using UnityEngine;
 public class ConectController : Singleton<ConectController>
 {
     [SerializeField] int maxPlayer = 4;
-    override public async void Awake()
+    override public void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this.gameObject);
-        await UnityServices.InitializeAsync();
-
-
-
     }
     async void Start()
     {
+        await UnityServices.InitializeAsync();
+
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync().ContinueWith(task =>
-                        {
-                            if (task.IsFaulted)
-                            {
-                                Debug.LogError("Failed to sign in anonymously: " + task.Exception);
-                            }
-                            else
-                            {
-                                Debug.Log("Signed in anonymously");
-                            }
-                        });
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("Failed to sign in anonymously: " + task.Exception);
+                }
+                else
+                {
+                    Debug.Log("Signed in anonymously");
+                }
+            });
         }
         catch (AuthenticationException e)
         {
             Debug.Log("Authen error: " + e);
         }
-        _ = ChatSystem.Instance.startSystem();
-        //
+        await ChatSystem.Instance.startSystem();
     }
 
     public async Task<string> createRelay()
@@ -54,7 +51,6 @@ public class ConectController : Singleton<ConectController>
             RelayServerData sd = new RelayServerData(allocation, "dtls");
             GetComponent<UnityTransport>().SetRelayServerData(sd);
             NetworkManager.Singleton.StartHost();
-            NetworkManager.Singleton.StartClient();
             return joincode;
         }
         catch (RelayServiceException e)
