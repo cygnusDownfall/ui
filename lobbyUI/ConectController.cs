@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport;
 using Unity.Networking.Transport.Relay;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -39,6 +41,18 @@ public class ConectController : Singleton<ConectController>
             Debug.Log("Authen error: " + e);
         }
         await ChatSystem.Instance.startSystem();
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+    }
+
+    private void OnClientDisconnected(ulong obj)
+    {
+        Debug.Log("client disconnected:" + obj);
+    }
+
+    private void OnClientConnect(ulong obj)
+    {
+        Debug.Log("client connected:" + obj);
     }
 
     public async Task<string> createRelay()
@@ -75,6 +89,7 @@ public class ConectController : Singleton<ConectController>
             Debug.LogError("relay error:" + e);
         }
     }
+
 }
 
 

@@ -1,13 +1,12 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Vivox;
+using Unity.Services.Vivox.AudioTaps;
 using UnityEngine;
 public class ChatSystem : SingletonPersistent<ChatSystem>
 {
+
     public string UserDisplayName = "";
-    List<RosterItem> rosterList = new List<RosterItem>();
     [SerializeField] GameObject rosterItemTemplate;
     public Transform rosterItemContainer;
     [SerializeField] GameObject textChatContentTemplate;
@@ -97,16 +96,12 @@ public class ChatSystem : SingletonPersistent<ChatSystem>
         ///RosterItem is a class intended to store the participant object, and reflect events relating to it into the game's UI.
         ///It is a sample of one way to use these events, and is detailed just below this snippet.
         //RosterItem newRosterItem = new RosterItem();
-        RosterItem newRosterItem = Instantiate(rosterItemTemplate, rosterItemContainer).AddComponent<RosterItem>();
 
-        newRosterItem.SetupRosterItem(participant);
-        rosterList.Add(newRosterItem);
     }
 
     private void onParticipantRemovedFromChannel(VivoxParticipant participant)
     {
-        RosterItem rosterItemToRemove = rosterList.FirstOrDefault(p => p.Participant.PlayerId == participant.PlayerId);
-        rosterList.Remove(rosterItemToRemove);
+
     }
 
     bool mute = false;
@@ -164,6 +159,7 @@ public class ChatSystem : SingletonPersistent<ChatSystem>
     #region mono
     private void Start()
     {
+        gameObject.AddComponent<VivoxChannelAudioTap>();
     }
     #endregion
 }
