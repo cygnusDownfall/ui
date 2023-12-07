@@ -27,7 +27,7 @@ public class menuFunc : Singleton<menuFunc>
             worldID.text = joincode;
 
             //loadingUI.Instance.Show();
-            await SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
 
             PlayerController.Instance.loadPlayer();
 
