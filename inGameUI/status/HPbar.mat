@@ -49,7 +49,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _alphaClip: 0.1
-    - _value: 0
+    - _value: 1
     m_Colors:
     - _backgroundColor: {r: 0.7645655, g: 1, b: 0.99335665, a: 0.50980395}
     - _color: {r: 0, g: 2.6286352, b: 0.055523228, a: 1}
