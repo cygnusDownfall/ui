@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4600624821662690542}
   - component: {fileID: 5910084748721079488}
   m_Layer: 0
-  m_Name: menuFunc
+  m_Name: UIFunctionSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

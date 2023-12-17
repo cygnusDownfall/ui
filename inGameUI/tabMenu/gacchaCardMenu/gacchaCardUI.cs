@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gacchaCardUI : MonoBehaviour
+public class gacchaCardUI : Singleton<gacchaCardUI>
 {
     gacchaSystem<cardModel> gacchaSys;
     public List<cardPack> packList; //sau nay co the phat trien lay tu api 
@@ -16,6 +16,7 @@ public class gacchaCardUI : MonoBehaviour
     [SerializeField] private GameObject packUITemplate;
     [Header("------------Ref UI Gaccha Card-----------------")]
     [SerializeField] private GameObject gacchaPanel;
+    public bool gacchaPanelActive { get => gacchaPanel.activeSelf; }
     [SerializeField] private GameObject leftsidePackPanel;
     [SerializeField] private GameObject rightsideContentPanel;
     [SerializeField] private GameObject buttonGacchaX1, buttonGacchaXAll;
@@ -27,7 +28,9 @@ public class gacchaCardUI : MonoBehaviour
 
     public byte prizeForGaccha;
 
-
+    /// <summary>
+    /// toogle gacchaPanel and load data 
+    /// </summary> 
     public void toogleUI()
     {
         toogleState = !toogleState;

@@ -28,7 +28,7 @@ public class ChatSystem : SingletonPersistent<ChatSystem>
     {
         try
         {
-            chanelName = menuFunc.Instance.joincode;
+            chanelName = UIFunctionSystem.Instance.joincode;
         }
         catch
         {
@@ -42,7 +42,7 @@ public class ChatSystem : SingletonPersistent<ChatSystem>
     {
         try
         {
-            chanelName = menuFunc.Instance.joincode;
+            chanelName = UIFunctionSystem.Instance.joincode;
         }
         catch
         {
@@ -138,7 +138,7 @@ public class ChatSystem : SingletonPersistent<ChatSystem>
     public void SendMessage()
     {
 
-        SendMessage(menuFunc.Instance.joincode, inputTypingText.text);
+        SendMessage(UIFunctionSystem.Instance.joincode, inputTypingText.text);
     }
     public async Task startSystem()
     {
