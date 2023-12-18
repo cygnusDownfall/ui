@@ -6,20 +6,51 @@ using UnityEngine.UI;
 public class otherPlayerInfo : SingletonNetwork<otherPlayerInfo>
 {
     public GameObject infoPrefab;
-    public List<playerInfo> datas = new List<playerInfo>();
+    public Dictionary<ulong, Slider> datas = new Dictionary<ulong, Slider>();
 
     [ClientRpc]
-    public void SpawnInfoClientRpc(Vector3 pos, string name, NetworkObjectReference playerObj)
+    public void SpawnInfoClientRpc(Vector3 pos, NetworkObjectReference playerObj, ulong clientID)
     {
-        var go = Instantiate(infoPrefab, pos, Quaternion.identity);
+        if (clientID == NetworkManager.Singleton.LocalClientId)
+        {
+            Debug.Log("client call itself rpc");
+            return;
+        }
 
         playerObj.TryGet(out NetworkObject net);
-        playerInfo info = net.gameObject.GetComponent<ControllReceivingSystem>().curCharacterControl.gameObject.GetComponent<playerInfo>();
-        info.hp.OnValueChanged += (o, n) =>
+        GameObject Obj = net.gameObject;
+        var info = Obj.GetComponent<playerInfo>();
+
+        var infoObj = itemDropPooling.Instance.TakeOut("otherinfo") ?? Instantiate(infoPrefab, transform);
+        infoObj.GetComponentInChildren<Text>().text = info.namePlayer;
+        datas.Add(clientID, infoObj.GetComponentInChildren<Slider>());
+        info.hp.OnValueChanged += (v1, v2) =>
         {
-            go.GetComponentInChildren<Slider>().value = n / (float)info.maxHP;
+            updateValueInfo(v2 / (float)info.maxHP, clientID);
         };
-        datas.Add(info);
     }
+    [ClientRpc]
+    public void despawnClientRpc(ulong clientID)
+    {
+        if (clientID == NetworkManager.Singleton.LocalClientId)
+        {
+            Debug.Log("client call itself rpc");
+            return;
+        }
+        GameObject infoObj = datas[clientID].gameObject.transform.parent.gameObject;
+        itemDropPooling.Instance.PushIn("otherinfo", infoObj);
+
+    }
+
+    private void updateValueInfo(float value, ulong clientID)
+    {
+        if (clientID == NetworkManager.Singleton.LocalClientId)
+        {
+            Debug.Log("client call itself rpc");
+            return;
+        }
+        datas[clientID].value = value;
+    }
+
 
 }
