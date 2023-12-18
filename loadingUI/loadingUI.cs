@@ -14,15 +14,15 @@ public class loadingUI : Singleton<loadingUI>
         loadingProcess = process;
         GetComponent<Image>().sprite = sprites[process];
     }
-    public IEnumerator run(){
-        while(loadingProcess<sprites.Length){
-            yield return new WaitForSeconds(deltaChangeSprite);
-            SetLoadingProcess((byte)(loadingProcess+1));
-            if(isLoop&&(loadingProcess==sprites.Length-1)){
-                loadingProcess=0;
-            }
-        }
-    }
+    //public IEnumerator run(){
+    //    while(loadingProcess<sprites.Length){
+    //        yield return new WaitForSeconds(deltaChangeSprite);
+    //        SetLoadingProcess((byte)(loadingProcess+1));
+    //        if(isLoop&&(loadingProcess==sprites.Length-1)){
+    //            loadingProcess=0;
+    //        }
+    //    }
+    //}
 
     void Start()
     {
@@ -33,13 +33,13 @@ public class loadingUI : Singleton<loadingUI>
     {
         Debug.Log("loading ...."+Time.time);
         gameObject.SetActive(true);
-        StartCoroutine(run());
+       // StartCoroutine(run());
     }
 
     public void Hide()
     {
         Debug.Log("unloading...."+Time.time);
         gameObject.SetActive(false);
-        StopCoroutine(run());
+       // StopCoroutine(run());
     }
 }

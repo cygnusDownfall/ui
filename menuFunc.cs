@@ -34,11 +34,13 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
 
             //loadingUI.Instance.Show();
             SceneManager.LoadScene(1, LoadSceneMode.Additive);
-            while (!NetworkManager.Singleton.IsConnectedClient)//&& !NetworkManager.Singleton.IsHost)
+
+            while (!NetworkManager.Singleton.IsConnectedClient&& !NetworkManager.Singleton.IsHost)
             {
                 Debug.Log("waiting for client to connect:  " + Time.time);
                 await Task.Delay(1000);
             }
+
             PlayerController.Instance.loadPlayer();
             //join channel with joincode 
             _ = ChatSystem.Instance.JoinEchoChannelAsync();
