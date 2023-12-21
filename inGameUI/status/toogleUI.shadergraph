@@ -59,6 +59,9 @@
         },
         {
             "m_Id": "4fe45a197a974fe68e8b3252cefe69c8"
+        },
+        {
+            "m_Id": "d240d1d1d54243b18ed735a4d2c02160"
         }
     ],
     "m_GroupDatas": [],
@@ -118,6 +121,20 @@
                     "m_Id": "4fe45a197a974fe68e8b3252cefe69c8"
                 },
                 "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "a6ec87dbfc214d6d9d3679e720416d4b"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "38937118291c49c391be2135a12beeaf"
+                },
+                "m_SlotId": 0
             }
         },
         {
@@ -191,6 +208,9 @@
             },
             {
                 "m_Id": "38937118291c49c391be2135a12beeaf"
+            },
+            {
+                "m_Id": "d240d1d1d54243b18ed735a4d2c02160"
             }
         ]
     },
@@ -794,7 +814,7 @@
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
-    "m_AlphaClip": false,
+    "m_AlphaClip": true,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
     "m_SupportsLODCrossFade": false,
@@ -1177,6 +1197,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "cdc4f4e496084386b51395515ba9e64b",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha Clip Threshold",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "AlphaClipThreshold",
+    "m_StageCapability": 2,
+    "m_Value": 0.6399999856948853,
+    "m_DefaultValue": 0.5,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "cf08d5c4b6b449eca4417d657d36715b",
     "m_Id": 0,
@@ -1257,6 +1292,40 @@
     "m_Property": {
         "m_Id": "49674f932a6745bbaf013344ddc10411"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "d240d1d1d54243b18ed735a4d2c02160",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.AlphaClipThreshold",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "cdc4f4e496084386b51395515ba9e64b"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.AlphaClipThreshold"
 }
 
 {

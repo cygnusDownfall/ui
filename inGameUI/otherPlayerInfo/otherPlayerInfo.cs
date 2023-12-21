@@ -22,7 +22,7 @@ public class otherPlayerInfo : SingletonNetwork<otherPlayerInfo>
         var info = Obj.GetComponent<playerInfo>();
 
         var infoObj = itemDropPooling.Instance.TakeOut("otherinfo") ?? Instantiate(infoPrefab, transform);
-        infoObj.GetComponentInChildren<Text>().text = info.namePlayer;
+        infoObj.GetComponentInChildren<Text>().text = "Player " + clientID;
         datas.Add(clientID, infoObj.GetComponentInChildren<Slider>());
         info.hp.OnValueChanged += (v1, v2) =>
         {

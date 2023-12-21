@@ -74,8 +74,8 @@ public class gacchaCardUI : Singleton<gacchaCardUI>
     /// </summary>
     void loadMaxGacchaNumber()
     {
-        deckCard.Instance.cardPoint = PlayerController.Instance.playerInfo.cardPoint;
-        int res = deckCard.Instance.cardPoint / prizeForGaccha;
+        var point = playerGeneralInfo.Instance.cardPoint;
+        int res = point / prizeForGaccha;
         byte tmp = (byte)res;
         Debug.Log(tmp);
         buttonGacchaXAll.GetComponent<Button>().onClick.AddListener(() => clickToGaccha(tmp));
@@ -102,7 +102,7 @@ public class gacchaCardUI : Singleton<gacchaCardUI>
     {
         if (num == 0) return;
         Debug.Log(num * prizeForGaccha);
-        if (deckCard.Instance.cardPoint < num * prizeForGaccha) return;
+        if (playerGeneralInfo.Instance.cardPoint < num * prizeForGaccha) return;
         List<cardModel> res = new List<cardModel>();
         gacchaSys ??= new gacchaSystem<cardModel>();
         Debug.Log("click gaccha pack index:" + indexOfCurrentPack);
