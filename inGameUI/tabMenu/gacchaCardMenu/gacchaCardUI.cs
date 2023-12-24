@@ -34,6 +34,7 @@ public class gacchaCardUI : Singleton<gacchaCardUI>
     public void toogleUI()
     {
         toogleState = !toogleState;
+        Debug.Log(toogleState);
         if (toogleState)
         {
             gacchaPanel.SetActive(true);
