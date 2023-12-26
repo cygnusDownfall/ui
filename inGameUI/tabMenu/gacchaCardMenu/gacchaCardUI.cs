@@ -45,6 +45,20 @@ public class gacchaCardUI : Singleton<gacchaCardUI>
             gacchaPanel.SetActive(false);
         }
     }
+    public void toogleUI(bool state)
+    {
+        toogleState = state;
+        Debug.Log(toogleState);
+        if (toogleState)
+        {
+            gacchaPanel.SetActive(true);
+            loadWindowGacchaCard();
+        }
+        else
+        {
+            gacchaPanel.SetActive(false);
+        }
+    }
     #region loading UI
     public void loadWindowGacchaCard()
     {

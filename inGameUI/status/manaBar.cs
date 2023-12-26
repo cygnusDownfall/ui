@@ -76,8 +76,8 @@ public class manaBar : Singleton<manaBar>
         { currentMana = 0; }
         for (int i = currentMana + amount - 1; i >= currentMana; i--)
         {
-            Debug.Log(i);
-            Debug.Log(currentMana);
+            // Debug.Log(i);
+            // Debug.Log(currentMana);
             tokens[i].GetComponent<Image>().material = tokenMatOff;
         }
     }
