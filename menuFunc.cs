@@ -22,12 +22,12 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
             if ((joincode == null) || (joincode == ""))
             {
                 Debug.Log("Please Enter a Join Code");
-                joincode = await GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().createRelay();
+                joincode = await ConectController.Instance.createRelay();
                 Debug.LogWarning("create room:" + joincode);
             }
             else
             {
-                await GameObject.FindGameObjectWithTag("net").GetComponent<ConectController>().joinRelay(joincode);
+                await ConectController.Instance.GetComponent<ConectController>().joinRelay(joincode);
 
             }
             worldID.text = joincode;
@@ -35,7 +35,7 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
             //loadingUI.Instance.Show();
             SceneManager.LoadScene(1, LoadSceneMode.Additive);
 
-            while (!NetworkManager.Singleton.IsConnectedClient&& !NetworkManager.Singleton.IsHost)
+            for(int time=0,maxtime=10; !NetworkManager.Singleton.IsConnectedClient&& !NetworkManager.Singleton.IsServer&&time<maxtime;time++)
             {
                 Debug.Log("waiting for client to connect:  " + Time.time);
                 await Task.Delay(1000);
