@@ -10,7 +10,7 @@ public class otherPlayerInfo : SingletonNetwork<otherPlayerInfo>
     public void SpawnInfo(playerInfo info, ulong clientID)
     {
         var infoObj = itemPooling.Instance.TakeOut("otherinfo") ?? Instantiate(infoPrefab, transform);
-        infoObj.GetComponentInChildren<Text>().text = "Player " + clientID;
+        infoObj.GetComponentInChildren<TMPro.TMP_Text>().text = "Player " + clientID;
         datas.Add(clientID, infoObj.GetComponentInChildren<Slider>());
         info.hp.OnValueChanged += (v1, v2) =>
         {
