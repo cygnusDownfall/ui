@@ -33,13 +33,17 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
             worldID.text = joincode;
 
             //loadingUI.Instance.Show();
-
+            SceneEventProgressStatus status;
             //SceneManager.LoadScene(1, LoadSceneMode.Additive);
             if (NetworkManager.Singleton.IsServer)
             {
-                var status = NetworkManager.Singleton.SceneManager.LoadScene("base", LoadSceneMode.Additive);
-                Debug.Log("load scene status:" + status);
+                status = NetworkManager.Singleton.SceneManager.LoadScene("base", LoadSceneMode.Additive);
             }
+            NetworkManager.Singleton.SceneManager.OnLoadComplete += (clientID, scenename, loadmode) => { Debug.Log("LOAD COMPLETE:  client:" + clientID + " load scene:" + scenename); };
+
+            NetworkManager.Singleton.SceneManager.OnSceneEvent += (ev) => Debug.Log("scene event: " + ev + "\ntype:" +
+            ev.SceneEventType + "\nsceneName:" + ev.SceneName + "\nclient complete: " + ev.ClientsThatCompleted);
+
             for (int time = 0, maxtime = 10; !NetworkManager.Singleton.IsConnectedClient && !NetworkManager.Singleton.IsServer && time < maxtime; time++)
             {
                 Debug.Log("waiting for client to connect:  " + Time.time);
