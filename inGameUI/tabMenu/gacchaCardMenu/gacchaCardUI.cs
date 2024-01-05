@@ -31,19 +31,19 @@ public class gacchaCardUI : Singleton<gacchaCardUI>
     /// <summary>
     /// toogle gacchaPanel and load data 
     /// </summary> 
-    public void toogleUI()
+    public bool toogleUI()
     {
         toogleState = !toogleState;
-        Debug.Log(toogleState);
+        Debug.Log("gaccha panel toogle:" + toogleState);
+        gacchaPanel.SetActive(toogleState);
+        PlayerController.Instance.toogleEvent(!toogleState);
+
         if (toogleState)
         {
-            gacchaPanel.SetActive(true);
             loadWindowGacchaCard();
         }
-        else
-        {
-            gacchaPanel.SetActive(false);
-        }
+
+        return toogleState;
     }
     public void toogleUI(bool state)
     {
