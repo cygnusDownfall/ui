@@ -39,8 +39,6 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
             {
                 status = NetworkManager.Singleton.SceneManager.LoadScene("base", LoadSceneMode.Additive);
             }
-            NetworkManager.Singleton.SceneManager.OnLoadComplete += (clientID, scenename, loadmode) => { Debug.Log("LOAD COMPLETE:  client:" + clientID + " load scene:" + scenename); };
-
             NetworkManager.Singleton.SceneManager.OnSceneEvent += (ev) => Debug.Log("scene event: " + ev + "\ntype:" +
             ev.SceneEventType + "\nsceneName:" + ev.SceneName + "\nclient complete: " + ev.ClientsThatCompleted);
 
@@ -65,7 +63,7 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
     {
         menuCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = isMenu ? 100 : 0;
         menuCam.SetActive(isMenu);
-        PlayerController.Instance.setPlayerControllable(!isMenu);
+        PlayerController.Instance.toogleEvent(!isMenu);
         gameplayCanvas.SetActive(!isMenu);
     }
     public void toogle(GameObject obj)
