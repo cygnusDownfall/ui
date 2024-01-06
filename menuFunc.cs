@@ -12,6 +12,13 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
     private void Start()
     {
         gameplayCanvas.SetActive(false);
+        loadingWait(1);
+    }
+    public async void loadingWait(int secconds)
+    {
+        loadingUI.Instance.Show();
+        await Task.Delay(secconds*1000);
+        loadingUI.Instance.Hide();
     }
     public async void EnterRoom()
     {

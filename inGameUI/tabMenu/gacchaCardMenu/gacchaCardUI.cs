@@ -138,11 +138,20 @@ public class gacchaCardUI : Singleton<gacchaCardUI>
     }
     IEnumerator showResultGaccha(List<cardModel> res)
     {
+        if (res.Count == 0) yield break;
         gacchaResultPanel.SetActive(true);
         Debug.Log("number of Result gaccha:" + res.Count);
         for (int i = 0; i < res.Count; i++)
         {
-            var cardUI = gacchaResultContentZone.GetChild(i).gameObject ?? Instantiate(cardUIResultTemplate, gacchaResultContentZone);
+            GameObject cardUI;
+            if (i < gacchaResultContentZone.childCount)
+            {
+                cardUI = gacchaResultContentZone.GetChild(i).gameObject;
+            }
+            else
+            {
+                cardUI = Instantiate(cardUIResultTemplate, gacchaResultContentZone);
+            }
             Debug.Log(cardUI);
             if (gacchaResultContentZone.GetChild(i).gameObject != null) cardUI.SetActive(true);
             cardUI.GetComponent<Image>().sprite = res[i].icon;
