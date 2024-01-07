@@ -17,7 +17,7 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
     public async void loadingWait(int secconds)
     {
         loadingUI.Instance.Show();
-        await Task.Delay(secconds*1000);
+        await Task.Delay(secconds * 1000);
         loadingUI.Instance.Hide();
     }
     public async void EnterRoom()
@@ -52,12 +52,12 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
             for (int time = 0, maxtime = 10; !NetworkManager.Singleton.IsConnectedClient && !NetworkManager.Singleton.IsServer && time < maxtime; time++)
             {
                 Debug.Log("waiting for client to connect:  " + Time.time);
-                await Task.Delay(1000);
+                await Task.Delay(2000);
             }
 
             PlayerController.Instance.loadPlayer();
             //join channel with joincode 
-            _ = ChatSystem.Instance.JoinEchoChannelAsync();
+            // _ = ChatSystem.Instance.JoinEchoChannelAsync();
             toogleGameMenu(false);
         }
         catch (UnityException e)
