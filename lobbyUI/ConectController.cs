@@ -40,7 +40,7 @@ public class ConectController : Singleton<ConectController>
         {
             Debug.Log("Authen error: " + e);
         }
-        await ChatSystem.Instance.startSystem();
+      //  await ChatSystem.Instance.startSystem();
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnect;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
     }
