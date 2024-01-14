@@ -9,6 +9,7 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
     public string joincode;
     [SerializeField] GameObject menuCam;
     [SerializeField] GameObject gameplayCanvas;
+    public Canvas aimcanvas;
     private void Start()
     {
         gameplayCanvas.SetActive(false);
@@ -59,6 +60,7 @@ public class UIFunctionSystem : Singleton<UIFunctionSystem>
             //join channel with joincode 
             // _ = ChatSystem.Instance.JoinEchoChannelAsync();
             toogleGameMenu(false);
+            aimcanvas.enabled = true;
         }
         catch (UnityException e)
         {

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +16,7 @@ public class otherPlayerInfo : SingletonNetwork<otherPlayerInfo>
         var infoNet = infoObj.GetComponent<NetworkObject>();
 
         //set 
-        infoObj.GetComponentInChildren<TMPro.TMP_Text>().text = "Player " + clientID;
+        infoObj.GetComponentInChildren<TMPro.TMP_Text>().text = "Người chơi: " + clientID;
         var hpUI = infoObj.GetComponentInChildren<Slider>();
         hpUI.value = 1;
         datas.Add(clientID, hpUI);
